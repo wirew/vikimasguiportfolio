@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/icons8-roblox-studio-24.png" type="image/x-icon">
+  <title>Vikima's Portfolio</title>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+      background: #222;
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
+    } */
+
+.gradientanimation {
+  font-size: 1.2rem;
+  font-weight: 900;
+  background: linear-gradient(
+    90deg,
+    #8a2be2,
+    #1e90ff,
+    #8a2be2 
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+   color: transparent;
+  animation: gradientMove 6s linear infinite alternate;
+  margin-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+    .nav-btn.left,
+    .nav-btn.right {
+      text-align: center;
+      padding-bottom: 50px;
+    }
+
+    button,
+    .copy-icon img,
+    .nav-btn,
+    .slide img,
+    .mid-container>div,
+    .username-container {
+      transition: all 0.3s ease;
+    }
+
+    button:hover,
+    .copy-icon:hover img,
+    .nav-btn:hover {
+      border-radius: 5px;
+      transform: scale(1.1);
+      background-color: #3a3a3a;
+    }
+
+    .slide img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+      box-shadow: 0 0 10px rgba(94, 177, 255, 0.4);
+    }
+
+    .mid-container>div:hover {
+      background-color: #3a3a3a;
+      transform: translateY(-5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .username-container:hover {
+      border-color: rgb(94, 177, 255);
+    }
+
+    .spin {
+      animation: spin 0.5s linear;
+    }
+
+    
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .main-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 250px;
+      position: relative;
+      padding: 40px 20px;
+    }
+
+    .main-section img {
+      width: 100px;
+    }
+
+    .main-section h1 {
+      font-size: 1.5rem;
+      padding-bottom: 5px;
+    }
+
+    .blue {
+      color: rgb(94, 177, 255);
+    }
+
+    .mid-section {
+      background: #1b1b1b;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .mid-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background: rgb(94, 177, 255);
+      z-index: 1;
+    }
+
+    .mid-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .Red_Span {
+      color: rgb(255, 87, 87);
+    }
+
+    .mid-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .mid-container>div {
+      background: #2a2a2a;
+      padding: 20px;
+      flex: 1 1 250px;
+    }
+
+    .Portfolio {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      background: #222;
+    }
+
+    .Portfolio::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background: rgb(94, 177, 255);
+    }
+
+    .Portfolio h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .project-section {
+      margin: 40px 0;
+    }
+
+    .project-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-transform: capitalize;
+    }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+      background: #2a2a2a;
+      border-radius: 8px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      text-align: center;
+      color: #ccc;
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .slide h3 {
+      margin: 5px 0;
+      color: #eee;
+    }
+
+    .slide h4 {
+      margin: 0;
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #bbb;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 4px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-btn.left {
+      left: 10px;
+    }
+
+    .nav-btn.right {
+      right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-btn {
+        font-size: 1.5rem;
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .username-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #2a2a2a;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      padding: 10px 15px;
+      max-width: 300px;
+      margin: 0 auto 40px auto;
+      gap: 10px;
+    }
+
+    .username-container img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .username-container p {
+      flex: 1;
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .copy-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .copy-icon img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .RobloxStudiPhoto {
+      padding-top: 50px;
+    }
+
+    .payment-icons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .payment-icons img {
+      height: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="main-section">
+    <img src="images/icons8-roblox-studio-100.png" alt="robloxstudio" class="RobloxStudiPhoto" />
+    <h1><span class="blue">Vikima</span>'s Portfolio</h1>
+    <h2 class="gradientanimation">Build Faster. Design Better.</h2>
+  </section>
+
+  <section class="mid-section">
+    <h2>About me</h2>
+    <div class="mid-container">
+      <div>
+        <h3>Experience</h3>
+        <p>5 years of past work, worked with various verified developers. Every project I worked on saw success.</p>
+      </div>
+      <div>
+        <h3>What I Do</h3>
+        <p>Works on Every Device: UI that fits PC, mobile, and console screens perfectly, no weird resizing.</p>
+        <p>Organization is my priority. UI I deliver is easily scriptable, and pleasing to work with.</p>
+        <p>Instant Attraction: Designs that grab players’ attention in seconds, the first impression you need.</p>
+      </div>
+      <div>
+        <h3>Why Me?</h3>
+        <p>Success of your game is my obsession and goal. You aren't just hiring a designer, you're bringing a teammate, Don't like my work? Get a refund, ZERO risk.</p>
+      </div>
+      <div>
+        <h3>Availability</h3>
+        <p>Availability / TimeZone: Time zone? Doesn't matter. I'm in Europe, but I will absolutely no life your project, just to speed things up.</p>
+      </div>
+      <div>
+        <h3>Payment</h3>
+        <div class="payment-icons">
+          <img src="images/icons8-robux-100.png" alt="robux" />
+          /
+          <img src="images/icons8-cash-app-100.png" alt="cashapp" />
+        </div>
+        <p>I Accept Robux and Cashapp.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="Portfolio">
+    <h2>My Portfolio / Past Works</h2>
+    <section class="project-section" id="project1">
+      <h2>Project FACE<span class="blue">OFF</span></h2>
+      <div class="slider">
+        <button class="nav-btn left">&#8249;</button>
+        <div class="slides">
+          <div class="slide">
+            <img src="images/mvs_inv.PNG" />
+            <h3>Inventory Gui</h3>
+            <h4>Very modernised Inventory gui</h4>
+          </div>
+          <div class="slide">
+            <img src="images/killfeed_mvs.PNG" />
+            <h3>Killfeed</h3>
+            <h4>Killfeed Gui | Opponent/Ally</h4>
+          </div>
+          <div class="slide">
+            <img src="images/pads.PNG" />
+            <h3>On Pad</h3>
+            <h4>When player stands on a pad for 1v1</h4>
+          </div>
+          <div class="slide">
+            <img src="images/simple_mapchoosing.PNG" />
+            <h3>Map Voting</h3>
+            <h4>Modernised Map Choosing Gui</h4>
+          </div>
+          <div class="slide">
+            <img src="images/stats.PNG" />
+            <h3>Score</h3>
+            <h4>GUI For Score and time.</h4>
+          </div>
+          <div class="slide">
+            <img src="images/timer.PNG" />
+            <h3>Timer</h3>
+            <h4>Amazing Timer</h4>
+          </div>
+        </div>
+        <button class="nav-btn right">&#8250;</button>
+      </div>
+    </section>
+
+    <section class="project-section" id="project2">
+      <h2>Da <span class="Red_Span">Hood</span> Type Game</h2>
+      <div class="slider">
+        <button class="nav-btn left">&#8249;</button>
+        <div class="slides">
+          <div class="slide">
+            <img src="images/crew_dh.PNG" />
+            <h3>Crew Frame</h3>
+            <h4>Custom Da Hood Type Gui</h4>
+          </div>
+          <div class="slide">
+            <img src="images/settings_dh.PNG" />
+            <h3>Settings Frame</h3>
+            <h4>Custom Da Hood Type Gui</h4>
+          </div>
+          <div class="slide">
+            <img src="images/crosshaireditor_dh.PNG" />
+            <h3>Crosshair Editor</h3>
+            <h4>Custom Da Hood Type Gui</h4>
+          </div>
+          <div class="slide">
+            <img src="images/gamepass_dh.PNG" />
+            <h3>Gamepass Frame</h3>
+            <h4>Custom Da Hood Type Gui</h4>
+          </div>
+          <div class="slide">
+            <img src="images/joincrew_dh.PNG" />
+            <h3>Join Crew Frame</h3>
+            <h4>Custom Da Hood Type Gui</h4>
+          </div>
+          <div class="slide">
+            <img src="images/leaderboard_dh.PNG" />
+            <h3>Leaderboard Frame</h3>
+            <h4>Colors change on streaks</h4>
+          </div>
+        </div>
+        <button class="nav-btn right">&#8250;</button>
+      </div>
+    </section>
+
+    <section class="project-section" id="project3">
+      <h2>Random Grow <span class="blue">A</span> Armory Game</h2>
+      <div class="slider">
+        <button class="nav-btn left">&#8249;</button>
+        <div class="slides">
+          <div class="slide">
+            <img src="images/crafting_gag.PNG" />
+            <h3>Crafting</h3>
+            <h4>Grow A Garden Style GUI</h4>
+          </div>
+          <div class="slide">
+            <img src="images/seed_gag.PNG" />
+            <h3>Seed Shop</h3>
+            <h4>Grow A Garden Style GUI</h4>
+          </div>
+        </div>
+        <button class="nav-btn right">&#8250;</button>
+      </div>
+    </section>
+  </section>
+
+  <section class="contact">
+    <div class="username-container">
+      <img src="images/icons8-discord-50.png" alt="discord" />
+      <p id="username">@vikima</p>
+      <button class="copy-icon" onclick="copyUsername()">
+        <img src="images/icons8-copy-60.png" alt="copy" />
+      </button>
+    </div>
+  </section>
+
+  <script>
+    function copyUsername() {
+      const txt = document.getElementById("username").innerText;
+      navigator.clipboard.writeText(txt);
+      const discordIcon = document.querySelector(".username-container img");
+      discordIcon.classList.add("spin");
+      setTimeout(() => discordIcon.classList.remove("spin"), 1000);
+    }
+
+    document.querySelectorAll(".project-section").forEach((section) => {
+      const slides = section.querySelector(".slides");
+      const btnLeft = section.querySelector(".nav-btn.left");
+      const btnRight = section.querySelector(".nav-btn.right");
+      let idx = 0;
+      const total = slides.children.length;
+
+      btnLeft.addEventListener("click", () => {
+        idx = idx > 0 ? idx - 1 : total - 1;
+        slides.style.transform = `translateX(-${100 * idx}%)`;
+      });
+
+      btnRight.addEventListener("click", () => {
+        idx = idx < total - 1 ? idx + 1 : 0;
+        slides.style.transform = `translateX(-${100 * idx}%)`;
+      });
+    });
+  </script>
+</body>
+
+</html>

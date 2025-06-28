@@ -29,43 +29,32 @@
       }
     }
 
-    /* @keyframes gradientMove {
+    .gradientanimation {
+      font-size: 1.2rem;
+      font-weight: 900;
+      background: linear-gradient(90deg,
+          #8a2be2,
+          #1e90ff,
+          #8a2be2);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      animation: gradientMove 6s linear infinite alternate;
+      margin-top: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes gradientMove {
       0% {
         background-position: 0% 50%;
       }
 
       100% {
-        background-position: 100% 50%;
+        background-position: 300% 50%;
       }
-    } */
-
-.gradientanimation {
-  font-size: 1.2rem;
-  font-weight: 900;
-  background: linear-gradient(
-    90deg,
-    #8a2be2,
-    #1e90ff,
-    #8a2be2 
-  );
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-   color: transparent;
-  animation: gradientMove 6s linear infinite alternate;
-  margin-top: 10px;
-  position: relative;
-  z-index: 2;
-}
-
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 300% 50%;
-  }
-}
+    }
 
     .nav-btn.left,
     .nav-btn.right {
@@ -110,7 +99,7 @@
       animation: spin 0.5s linear;
     }
 
-    
+
 
     @keyframes spin {
       from {
@@ -347,6 +336,17 @@
     .payment-icons img {
       height: 25px;
     }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 
@@ -372,11 +372,13 @@
       </div>
       <div>
         <h3>Why Me?</h3>
-        <p>Success of your game is my obsession and goal. You aren't just hiring a designer, you're bringing a teammate, Don't like my work? Get a refund, ZERO risk.</p>
+        <p>Success of your game is my obsession and goal. You aren't just hiring a designer, you're bringing a teammate,
+          Don't like my work? Get a refund, ZERO risk.</p>
       </div>
       <div>
         <h3>Availability / Timezone</h3>
-        <p>Time zone? Doesn't matter. I'm in Europe, but I will absolutely no life your project, just to speed things up.</p>
+        <p>Time zone? Doesn't matter. I'm in Europe, but I will absolutely no life your project, just to speed things
+          up.</p>
       </div>
       <div>
         <h3>Payment</h3>
@@ -426,6 +428,56 @@
             <img src="images/timer.PNG" />
             <h3>Timer</h3>
             <h4>Amazing Timer</h4>
+          </div>
+        </div>
+        <button class="nav-btn right">&#8250;</button>
+      </div>
+    </section>
+
+    <section class="project-section" id="project2">
+      <h2>Counter Strike 2 Redesign</h2>
+      <div class="slider">
+        <button class="nav-btn left">&#8249;</button>
+        <div class="slides">
+          <div class="slide">
+            <img src="images/fullframe2.PNG" />
+            <h3>Full Frame</h3>
+            <h4>This Is Full Gameplay Frame</h4>
+          </div>
+          <div class="slide">
+            <img src="images/buymenu3.PNG" />
+            <h3>BuyMenu</h3>
+            <h4>CS2 BuyMenu Design In roblox</h4>
+          </div>
+          <div class="slide">
+            <img src="images/scorecs2.PNG" />
+            <h3>Score</h3>
+            <h4>Score and players exactly like cs2</h4>
+          </div>
+          <div class="slide">
+            <img src="images/Health.PNG" />
+            <h3>Down Side</h3>
+            <h4>Health & Armor / Team Line / Ammo</h4>
+          </div>
+          <div class="slide">
+            <img src="images/loadoutcs2.PNG" />
+            <h3>Loadout</h3>
+            <h4>Same as cs2</h4>
+          </div>
+          <div class="slide">
+            <img src="images/chatmoney.PNG" />
+            <h3>Chat / Money</h3>
+            <h4>Chat and money design</h4>
+          </div>
+          <div class="slide">
+            <img src="images/radar.PNG" />
+            <h3>Radar</h3>
+            <h4>Radar Design with location</h4>
+          </div>
+          <div class="slide">
+            <img src="images/killfeedcs2.PNG" />
+            <h3>KillFeed</h3>
+            <h4>Killfeed Gui</h4>
           </div>
         </div>
         <button class="nav-btn right">&#8250;</button>
@@ -504,31 +556,49 @@
   </section>
 
   <script>
-    function copyUsername() {
-      const txt = document.getElementById("username").innerText;
-      navigator.clipboard.writeText(txt);
-      const discordIcon = document.querySelector(".username-container img");
-      discordIcon.classList.add("spin");
-      setTimeout(() => discordIcon.classList.remove("spin"), 1000);
-    }
+ function copyUsername() {
+    const txt = document.getElementById("username").innerText;
+    navigator.clipboard.writeText(txt);
+    const discordIcon = document.querySelector(".username-container img");
+    discordIcon.classList.add("spin");
+    setTimeout(() => discordIcon.classList.remove("spin"), 1000);
+  }
 
-    document.querySelectorAll(".project-section").forEach((section) => {
-      const slides = section.querySelector(".slides");
-      const btnLeft = section.querySelector(".nav-btn.left");
-      const btnRight = section.querySelector(".nav-btn.right");
-      let idx = 0;
-      const total = slides.children.length;
+  document.querySelectorAll(".project-section").forEach((section) => {
+    const slides = section.querySelector(".slides");
+    const btnLeft = section.querySelector(".nav-btn.left");
+    const btnRight = section.querySelector(".nav-btn.right");
+    let idx = 0;
+    const total = slides.children.length;
 
-      btnLeft.addEventListener("click", () => {
-        idx = idx > 0 ? idx - 1 : total - 1;
-        slides.style.transform = `translateX(-${100 * idx}%)`;
-      });
-
-      btnRight.addEventListener("click", () => {
-        idx = idx < total - 1 ? idx + 1 : 0;
-        slides.style.transform = `translateX(-${100 * idx}%)`;
-      });
+    btnLeft.addEventListener("click", () => {
+      idx = idx > 0 ? idx - 1 : total - 1;
+      slides.style.transform = `translateX(-${100 * idx}%)`;
     });
+
+    btnRight.addEventListener("click", () => {
+      idx = idx < total - 1 ? idx + 1 : 0;
+      slides.style.transform = `translateX(-${100 * idx}%)`;
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      } else {
+        entry.target.classList.remove("active");
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('.mid-container > div, .project-section, .contact, .slide').forEach(el => {
+    el.classList.add("reveal");
+    observer.observe(el);
+  });
+
   </script>
 </body>
 

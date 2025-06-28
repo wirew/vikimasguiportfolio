@@ -75,9 +75,9 @@
     .copy-icon:hover img,
     .nav-btn:hover {
       border-radius: 5px;
-      transform: scale(1.1);
       background-color: #3a3a3a;
     }
+
 
     .slide img:hover {
       transform: scale(1.05);
@@ -109,6 +109,14 @@
       to {
         transform: rotate(360deg);
       }
+    }
+
+    .main-section,
+    .mid-section,
+    .Portfolio,
+    .contact {
+      position: relative;
+      z-index: 1;
     }
 
     .main-section {
@@ -347,10 +355,25 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #rainCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 
 <body>
+
   <section class="main-section">
     <img src="images/icons8-roblox-studio-100.png" alt="robloxstudio" class="RobloxStudiPhoto" />
     <h1><span class="blue">Vikima</span>'s Portfolio</h1>
@@ -523,26 +546,6 @@
         <button class="nav-btn right">&#8250;</button>
       </div>
     </section>
-
-    <section class="project-section" id="project3">
-      <h2>Random Grow <span class="blue">A</span> Armory Game</h2>
-      <div class="slider">
-        <button class="nav-btn left">&#8249;</button>
-        <div class="slides">
-          <div class="slide">
-            <img src="images/crafting_gag.PNG" />
-            <h3>Crafting</h3>
-            <h4>Grow A Garden Style GUI</h4>
-          </div>
-          <div class="slide">
-            <img src="images/seed_gag.PNG" />
-            <h3>Seed Shop</h3>
-            <h4>Grow A Garden Style GUI</h4>
-          </div>
-        </div>
-        <button class="nav-btn right">&#8250;</button>
-      </div>
-    </section>
   </section>
 
   <section class="contact">
@@ -555,49 +558,122 @@
     </div>
   </section>
 
+  <canvas id="rainCanvas"></canvas>
+
   <script>
- function copyUsername() {
-    const txt = document.getElementById("username").innerText;
-    navigator.clipboard.writeText(txt);
-    const discordIcon = document.querySelector(".username-container img");
-    discordIcon.classList.add("spin");
-    setTimeout(() => discordIcon.classList.remove("spin"), 1000);
-  }
+    function copyUsername() {
+      const txt = document.getElementById("username").innerText;
+      navigator.clipboard.writeText(txt);
+      const discordIcon = document.querySelector(".username-container img");
+      discordIcon.classList.add("spin");
+      setTimeout(() => discordIcon.classList.remove("spin"), 1000);
+    }
 
-  document.querySelectorAll(".project-section").forEach((section) => {
-    const slides = section.querySelector(".slides");
-    const btnLeft = section.querySelector(".nav-btn.left");
-    const btnRight = section.querySelector(".nav-btn.right");
-    let idx = 0;
-    const total = slides.children.length;
+    document.querySelectorAll(".project-section").forEach((section) => {
+      const slides = section.querySelector(".slides");
+      const btnLeft = section.querySelector(".nav-btn.left");
+      const btnRight = section.querySelector(".nav-btn.right");
+      let idx = 0;
+      const total = slides.children.length;
 
-    btnLeft.addEventListener("click", () => {
-      idx = idx > 0 ? idx - 1 : total - 1;
-      slides.style.transform = `translateX(-${100 * idx}%)`;
+      btnLeft.addEventListener("click", () => {
+        idx = idx > 0 ? idx - 1 : total - 1;
+        slides.style.transform = `translateX(-${100 * idx}%)`;
+      });
+
+      btnRight.addEventListener("click", () => {
+        idx = idx < total - 1 ? idx + 1 : 0;
+        slides.style.transform = `translateX(-${100 * idx}%)`;
+      });
     });
 
-    btnRight.addEventListener("click", () => {
-      idx = idx < total - 1 ? idx + 1 : 0;
-      slides.style.transform = `translateX(-${100 * idx}%)`;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    }, {
+      threshold: 0.1
     });
-  });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      } else {
-        entry.target.classList.remove("active");
+    document.querySelectorAll('.mid-container > div, .project-section, .contact, .slide').forEach(el => {
+      el.classList.add("reveal");
+      observer.observe(el);
+    });
+
+    const canvas = document.getElementById('rainCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let windTilt = 0;
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      const center = window.innerWidth / 2;
+      const maxTilt = 1.5;
+      windTilt = ((e.clientX - center) / center) * maxTilt;
+    });
+
+    class Snowflake {
+      constructor() {
+        this.reset();
       }
-    });
-  }, {
-    threshold: 0.1
-  });
 
-  document.querySelectorAll('.mid-container > div, .project-section, .contact, .slide').forEach(el => {
-    el.classList.add("reveal");
-    observer.observe(el);
-  });
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * -canvas.height;
+        this.radius = Math.random() * 3 + 1;
+        this.speed = Math.random() * 1 + 0.5;
+        this.opacity = Math.random() * 0.5 + 0.3;
+      }
+
+      update() {
+        this.y += this.speed;
+        this.x += windTilt;
+
+        if (this.y > canvas.height) {
+          this.reset();
+          this.y = 0;
+        }
+
+        if (this.x > canvas.width) this.x = 0;
+        else if (this.x < 0) this.x = canvas.width;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    const snowCount = 50;
+    const snowflakes = [];
+
+    for (let i = 0; i < snowCount; i++) {
+      snowflakes.push(new Snowflake());
+    }
+
+    function animateSnow() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let flake of snowflakes) {
+        flake.update();
+        flake.draw();
+      }
+      requestAnimationFrame(animateSnow);
+    }
+
+    animateSnow();
 
   </script>
 </body>
